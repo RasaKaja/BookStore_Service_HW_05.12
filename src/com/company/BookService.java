@@ -9,6 +9,7 @@ public class BookService {
     ArrayList<Author> authors = new ArrayList<Author>();
 
     Scanner scanner = new Scanner(System.in);
+    Scanner scnInt = new Scanner(System.in);
 
     public void addBook(){
         // declare and initialize new book
@@ -35,6 +36,15 @@ public class BookService {
     }
 
     void removeBook() {
+        try {
+            System.out.println("Please input the index of the book you want to remove");
+            int bookIndex = scnInt.nextInt();
+            books.remove(bookIndex);
+
+            System.out.println("The Book removed successfully.");
+        } catch (Exception ex) {
+            System.out.println("Unable to remove specific book.");
+        }
 
     }
 
