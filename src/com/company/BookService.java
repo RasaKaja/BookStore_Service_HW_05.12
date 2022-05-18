@@ -1,98 +1,113 @@
 package com.company;
 
-import javax.sound.midi.Soundbank;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class BookService {
-    ArrayList<Book> books = new ArrayList<Book>();
-    ArrayList<Author> authors = new ArrayList<Author>();
+    ArrayList<Book> books = new ArrayList<>();
 
-    Scanner scanner = new Scanner(System.in);
-    Scanner scnInt = new Scanner(System.in);
-
-    public void addBook(){
-        // declare and initialize new book
-        Book book = new Book();
-
-        System.out.println("Please input the necessary info about the book.");
-
-        System.out.print("Author: ");
-        //authors. = scanner.nextLine();
-
-        System.out.print("Title: ");
-        book.title = scanner.nextLine();
-
-        System.out.print("Genre: ");
-        book.genre = Genre.valueOf(scanner.nextLine());
-
-        System.out.print("Year of Release: ");
-        book.yearOfRelease = scanner.nextInt();
-
-        System.out.print("Price: ");
-        book.price = scanner.nextDouble();
-
-        this.books.add(book);
+    // Method for add book
+    void addBook(Book book){ // any 'book' given here
+        books.add(book); // is added to array list 'books'
     }
 
-    void removeBook() {
-        try {
-            System.out.println("Please input the index of the book you want to remove");
-            int bookIndex = scnInt.nextInt();
-            books.remove(bookIndex);
-
-            System.out.println("The Book removed successfully.");
-        } catch (Exception ex) {
-            System.out.println("Unable to remove specific book.");
-        }
-
-    }
-
-    void listBooks(){
-        System.out.println("This is the List of Books: \n");
-        for (Book book : books){
-            System.out.println("Book " + book);
-        }
-    }
-
-    public void listBooksByFantasy(){
-        System.out.println("This is the List of FANTASY Books: ");
-        for (Book book : books) {
-            if (books.contains("FANTASY")) {
-                System.out.println();
+    Book findByTitle(String title){
+        for (Book book: books){
+            if (title.equals(book.title)){
+                return book;
             }
         }
+        return null; // if title doesn't match, it will return null
     }
 
-    void listBookBefore1999(){
-
+    void removeBook(Book book) {
+        books.remove(book);
     }
 
-    void getMostExpensiveBook(){
-
+    ArrayList<Book> listBooks (){
+        return books;
     }
 
-    void getCheapestBook(){
+    ArrayList<Book> listBooksByFantasyType () {
+        // create new array list to store books by fantasy type
+        ArrayList<Book> fantasyBooks = new ArrayList<>();
 
+        // loop through the book in bookstore and add any book that is of fantasy type to the new array list
+        for (Book book: books){
+            if (book.genre == Genre.FANTASY){
+                fantasyBooks.add(book);
+            }
+        }
+        // return the new array list when loop is completed
+        return fantasyBooks;
     }
 
-    void getSortedBooks(){
+    ArrayList<Book> listBookBefore1999(){
+        ArrayList<Book> bookList = new ArrayList<>();
 
+        // loop through the books in the store and add any book published before 1999 to the arraylist
+        for (Book book: books){
+            if (book.yearOfRelease < 1999){
+                bookList.add(book);
+            }
+        }
+        return bookList;
     }
 
-    void verifyBook(){
+    Book mostExpensiveBook(){
+        Book mostExpensiveBook = books.get(0);
 
+        for (Book book: books){
+            if (book.price > mostExpensiveBook.price){
+                mostExpensiveBook = book;
+            }
+        }
+        return mostExpensiveBook;
     }
 
-    void getBooksByAuthor(){
-
+    Book cheapestBook(){
+        Book cheapestBookInStore = books.get(0);
+        for (Book book: books){
+            if (book.price < cheapestBookInStore.price){
+                cheapestBookInStore = book;
+            }
+        }
+        return cheapestBookInStore;
     }
 
-    void getBookBy3Authors(){
-
+    Book bookBy3Authors(){
+        // loop through all the books in the arraylist
+        for (Book book: books){
+            if (book.authorList.size() == 3){
+                return book; //return any book that has 3 authors
+            }
+        }
+        return null; //return null if no book does
     }
 
+//    void getSortedBooks(){
+//        List<Book> books = new ArrayList<Book>();
+//        Collections.sort(book); //Collections.sort(al, Collections.reverseOrder());
+//    }
 
+    boolean verifyBook(Book book){
+        if (books.contains(book)){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    ArrayList<Book> findBooksByAuthor(Author author){
+        ArrayList<Book> booksByProvidedAuthor = new ArrayList<>();
 
+        // loop through all books and check if provided author is among the authors for each book.
+        // if yes add the book to the new arraylist of books
+        for (Book book: books){
+            if (book.authorList.contains(author)){
+                booksByProvidedAuthor.add(book);
+            }
+        }
+        return booksByProvidedAuthor;
+    }
 }

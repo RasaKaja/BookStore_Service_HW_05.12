@@ -2,73 +2,35 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Book {
-    private ArrayList<Author> authors = new ArrayList<Author>();
+public class Book implements Comparable {
+    ArrayList<Author> authorList;
     String title;
     double price;
-    int yearOfRelease;
+    Integer yearOfRelease; //because we are going to compare, it should be wrapper class
     Genre genre;
 
 
-    Book(){
-        //Author author = new Author();
-        this.authors = authors;
-        this.title = " ";
-        double price = 0d;
-        int yearOfRelease = 0000;
-        Genre genre = Genre.UNKNOWN;
-    }
-
-    Book(String title, Genre genre, int yearOfRelease, double price){
+    Book(String title, double price, int yearOfRelease, Genre genre){
         this.title = title;
-        this.genre = genre;
-        this.yearOfRelease = yearOfRelease;
         this.price = price;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public int getYearOfRelease() {
-        return yearOfRelease;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public ArrayList<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public void setYearOfRelease(int yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
+        this.genre = genre;
+        this.authorList = new ArrayList<>();
     }
 
-    public void setAuthors(ArrayList<Author> authors) {
-        this.authors = authors;
-    }
 
     @Override
     public String toString() {
-        return "Author: " + authors + ", title: " + title + ", price = " + price + ", yearOfRelease = " + yearOfRelease +
-                ", genre = " + genre;
+        return "Book{" +
+                "authorList=" + authorList +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", yearOfRelease=" + yearOfRelease +
+                ", genre=" + genre +
+                '}';
+    }
+
+    public int compareTo(Object o){
+        return this.yearOfRelease.compareTo(((Book) o).yearOfRelease);
     }
 }
