@@ -7,13 +7,18 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
     Scanner intScanner = new Scanner(System.in);
     BookService bookService = new BookService();
-    Author author = new Author("David", "Olabadone", "Male");
+    Author author = new Author("Yann", "Martel", "male");
+    //Author author2 = new Author("Alexandre", "Dumas", "male");
+    Book book1 = new Book("Life of Pi", 15, 2001, Genre.ADVENTURE);
+    Book book2 = new Book("The Three Musketeers", 25, 1844, Genre.ADVENTURE);
+
 
     public static void main(String[] args) {
         System.out.println("Welcome to the BOOK STORE. What would you like to do today?");
         Scanner scanner = new Scanner(System.in);
 
         Main main = new Main();
+        main.addBooks();
 
         // loop through options as long as user doesn't enter "0"
         String input = "";
@@ -86,8 +91,17 @@ public class Main {
 
     }
 
+    void addBooks(){
+        bookService.addBook(book1);
+        bookService.addBook(book2);
+
+        System.out.println("Books added successfully");
+
+    }
+
     // add Book method: responsible for reading inputs from user and creating a new book
     void addBook() {
+
         System.out.println("Add a new Book to the store.");
 
         System.out.print("Enter the title: ");
@@ -126,7 +140,6 @@ public class Main {
 
         System.out.println(book.title + " added successfully.");
     }
-
 
     void listBooks() {
         System.out.println("List of ALL books in the Store: ");
@@ -272,22 +285,3 @@ public class Main {
         System.out.println(sortedBooks);
     }
 }
-
-
-//        Author author = new Author("Yann", "Martel", "male");
-//        Author author1 = new Author("Alexandre", "Dumas", "male");
-//        System.out.println(author);
-//        System.out.println(author1);
-//
-
-
-
-//       List<Book> book = new ArrayList<Book>();
-//       Book b1 = new Book("Life of Pi", Genre.ADVENTURE, 2001, 15d);
-//       book.add(b1);
-//       Book b2 = new Book("The Three Musketeers", Genre.ADVENTURE, 1844, 25d);
-//       book.add(b2);
-//       System.out.println(book);
-
-//    }
-//}
