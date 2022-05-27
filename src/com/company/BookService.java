@@ -85,11 +85,6 @@ public class BookService {
         return null; //return null if no book does
     }
 
-//    void getSortedBooks(){
-//        List<Book> books = new ArrayList<Book>();
-//        Collections.sort(book); //Collections.sort(al, Collections.reverseOrder());
-//    }
-
     boolean verifyBook(Book book){
         if (books.contains(book)){
             return true;
